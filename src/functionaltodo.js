@@ -10,10 +10,16 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 function TodoList({ list, addItem, deleteItem, editItem }) {
     const [userI, setUserI] = useState("");
-    const [newValue, setNewValue] = useState("");
 
     const updateInput = (value) => {
         setUserI(value);
+    };
+    const handleEdit = (index) => {
+        if (editedTodo !== null && editedTodo.trim() !== '') {
+            editItem(index, editedTodo);
+        }else{
+            return;
+        }
     };
 
     return (
@@ -69,8 +75,7 @@ function TodoList({ list, addItem, deleteItem, editItem }) {
                                         <Button
                                             variant="light"
                                             onClick={() => {
-                                                editItem(items.id, newValue);
-                                                setNewValue(""); 
+                                                handleEdit(index);
                                             }}
                                         >
                                             Edit
